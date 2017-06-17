@@ -1,10 +1,28 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+enum Suit
+{
+	CLUBS = 0,
+	DIAMONDS = 1,
+	HEARTS = 2,
+	SPADES = 3
+};
+
+enum Rank
+{
+	NINE = 9,
+	TEN = 10,
+	JACK = 11,
+	QUEEN = 12,
+	KING = 13,
+	ACE = 14
+};
+
 class Card : public sf::Drawable, public sf::Transformable
 {
 private:
-	constexpr static float SCALE = 0.25f;
+	constexpr static float SCALE = 1.0f;	//scaling is ugly
 	sf::Sprite sprite;
 public:
 	Card(sf::Texture &texture, sf::IntRect rect);
