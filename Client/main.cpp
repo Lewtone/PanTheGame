@@ -2,9 +2,13 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(1024, 768), "Pan The Game");
+	sf::Texture texture;
+	texture.loadFromFile("assets/cards.png");
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+	sprite.setTextureRect(sf::IntRect(0, 0, 560, 780));
+	sprite.setScale(0.5f, 0.5f);
 
 	while (window.isOpen())
 	{
@@ -15,8 +19,8 @@ int main()
 				window.close();
 		}
 
-		window.clear();
-		window.draw(shape);
+		window.clear(sf::Color::Green);
+		window.draw(sprite);
 		window.display();
 	}
 
