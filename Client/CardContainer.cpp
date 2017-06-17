@@ -8,7 +8,7 @@ CardContainer::CardContainer()
 
 void CardContainer::addCard(Card card)
 {
-	card.setPosition(card.getPosition().x + 21.0f * cards.size(), this->getPosition().y);
+	card.setPosition(card.getPosition().x + SPACE * cards.size(), this->getPosition().y);
 	cards.push_back(card);
 }
 

@@ -5,6 +5,7 @@
 class CardContainer : public sf::Drawable, public sf::Transformable
 {
 private:
+	static constexpr float SPACE = 21.0f;
 	std::vector<Card> cards;
 public:
 	CardContainer();
