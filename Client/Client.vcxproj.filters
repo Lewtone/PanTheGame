@@ -24,12 +24,18 @@
     <ClCompile Include="AssetsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CardContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AssetsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CardContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
