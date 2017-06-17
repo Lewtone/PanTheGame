@@ -5,6 +5,7 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1024, 768), "Pan The Game");
+	window.setFramerateLimit(60);
 	AssetsManager assetsManager;
 
 	std::vector<Card> cards;
