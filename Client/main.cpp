@@ -7,7 +7,7 @@ int main()
 	texture.loadFromFile("assets/cards.png");
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(0, 0, 560, 780));
+	sprite.setTextureRect(sf::IntRect(560*2, 780*0, 560, 780));
 	sprite.setScale(0.5f, 0.5f);
 
 	while (window.isOpen())
