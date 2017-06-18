@@ -15,6 +15,7 @@ int main()
 	cards.addCard(assetsManager.createCard(Rank::QUEEN, Suit::HEARTS));
 	cards.addCard(assetsManager.createCard(Rank::TEN, Suit::CLUBS));
 	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::DIAMONDS));
+	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::SPADES));
 
 
 	while (window.isOpen())
