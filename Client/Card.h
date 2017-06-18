@@ -26,6 +26,7 @@ private:
 	constexpr static float ACTIVE_CARD_JUMP = 20.0f;
 	sf::Sprite sprite;
 	bool active = false;
+	bool hovered = false;
 public:
 	Card(sf::Texture &texture, sf::IntRect rect);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -34,6 +35,8 @@ public:
 	const sf::Vector2f& getPosition();
 	bool isActive();
 	void setOppositeState();
+	void hover();
+	void unhover();
 	~Card();
 };
 

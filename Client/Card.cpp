@@ -48,6 +48,23 @@ void Card::setOppositeState()
 	}
 }
 
+void Card::hover()
+{
+	if (!hovered)
+	{
+		hovered = true;
+		sprite.move(0, -ACTIVE_CARD_JUMP);
+	}
+}
+
+void Card::unhover()
+{
+	if (hovered)
+	{
+		hovered = false;
+		sprite.move(0, ACTIVE_CARD_JUMP);
+	}
+}
 
 Card::~Card()
 {
