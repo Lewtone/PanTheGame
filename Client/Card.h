@@ -19,7 +19,7 @@ enum Rank
 	ACE = 14
 };
 
-class Card : public sf::Drawable, public sf::Transformable
+class Card : public sf::Drawable
 {
 private:
 	constexpr static float SCALE = 1.0f;	//scaling is ugly
@@ -28,6 +28,8 @@ public:
 	Card(sf::Texture &texture, sf::IntRect rect);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::FloatRect getRectangle();
+	void setPosition(float x, float y);
+	const sf::Vector2f& getPosition();
 	~Card();
 };
 

@@ -8,7 +8,7 @@ CardContainer::CardContainer()
 
 void CardContainer::addCard(Card card)
 {
-	card.setPosition(SPACE * cards.size(), card.getPosition().y);
+	card.setPosition(this->getPosition().x + SPACE * cards.size(), this->getPosition().y);
 	cards.push_back(card);
 }
 
@@ -19,12 +19,11 @@ void CardContainer::handleEvent(sf::Event & event)
 		case sf::Event::MouseButtonReleased:
 		{
 			sf::Vector2f mouseVector(event.mouseButton.x, event.mouseButton.y);
-			sf::Vector2f correctedVector = this->getPosition() - mouseVector;
 
 			for (int i = cards.size(); i != 0; --i)
 			{
 				Card &currentCard = cards.at(i - 1);
-				if (currentCard.getRectangle().contains(correctedVector))
+				if (currentCard.getRectangle().contains(mouseVector))
 				{
 					this->onClicked(currentCard);
 					return;
@@ -34,7 +33,7 @@ void CardContainer::handleEvent(sf::Event & event)
 
 		case sf::Event::MouseMoved:
 		{
-			sf::Vector2f mouseVector(event.mouseMove.x, event.mouseButton.y);
+			sf::Vector2f mouseVector(event.mouseMove.x, event.mouseMove.y);
 			if (!isFocused && this->getRectangle().contains(mouseVector))
 			{
 				isFocused = true;
@@ -70,7 +69,7 @@ sf::FloatRect CardContainer::getRectangle()
 void CardContainer::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for (auto& card : cards)
-		target.draw(card, this->getTransform());
+		target.draw(card);
 }
 
 

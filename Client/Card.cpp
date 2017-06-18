@@ -11,13 +11,22 @@ Card::Card(sf::Texture &texture, sf::IntRect rect)
 
 void Card::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	states.transform *= getTransform();
-	target.draw(sprite, states);
+	target.draw(sprite);
 }
 
 sf::FloatRect Card::getRectangle()
 {
 	return sprite.getGlobalBounds();
+}
+
+void Card::setPosition(float x, float y)
+{
+	sprite.setPosition(x, y);
+}
+
+const sf::Vector2f & Card::getPosition()
+{
+	return sprite.getPosition();
 }
 
 
