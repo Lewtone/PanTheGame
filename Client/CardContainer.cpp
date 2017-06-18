@@ -8,7 +8,7 @@ CardContainer::CardContainer()
 
 void CardContainer::addCard(Card card)
 {
-	card.setPosition(this->getPosition().x + SPACE * cards.size(), this->getPosition().y);
+	card.setPosition(position.x + SPACE * cards.size(), position.y);
 	cards.push_back(card);
 }
 
@@ -64,6 +64,17 @@ sf::FloatRect CardContainer::getRectangle()
 	}
 
 	return sf::FloatRect(position, size);
+}
+
+void CardContainer::setPosition(float x, float y)
+{
+	position.x = x;
+	position.y = y;
+}
+
+const sf::Vector2f & CardContainer::getPosition()
+{
+	return position;
 }
 
 void CardContainer::draw(sf::RenderTarget & target, sf::RenderStates states) const
