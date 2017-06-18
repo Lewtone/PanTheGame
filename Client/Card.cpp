@@ -29,6 +29,25 @@ const sf::Vector2f & Card::getPosition()
 	return sprite.getPosition();
 }
 
+bool Card::isActive()
+{
+	return active;
+}
+
+void Card::setOppositeState()
+{
+	if (active)
+	{
+		active = false;
+		sprite.move(0, ACTIVE_CARD_JUMP);
+	}
+	else
+	{
+		active = true;
+		sprite.move(0, -ACTIVE_CARD_JUMP);
+	}
+}
+
 
 Card::~Card()
 {

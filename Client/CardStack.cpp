@@ -4,7 +4,7 @@
 
 void CardStack::onClicked(Card & card)
 {
-	std::cout << "Clicked\n";
+	card.setOppositeState();
 }
 
 void CardStack::onGetFocus()

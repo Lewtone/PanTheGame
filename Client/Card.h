@@ -23,13 +23,17 @@ class Card : public sf::Drawable
 {
 private:
 	constexpr static float SCALE = 1.0f;	//scaling is ugly
+	constexpr static float ACTIVE_CARD_JUMP = 20.0f;
 	sf::Sprite sprite;
+	bool active = false;
 public:
 	Card(sf::Texture &texture, sf::IntRect rect);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::FloatRect getRectangle();
 	void setPosition(float x, float y);
 	const sf::Vector2f& getPosition();
+	bool isActive();
+	void setOppositeState();
 	~Card();
 };
 
