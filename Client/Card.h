@@ -27,6 +27,7 @@ private:
 public:
 	Card(sf::Texture &texture, sf::IntRect rect);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	sf::FloatRect getRectangle();
 	~Card();
 };
 

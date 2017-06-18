@@ -15,6 +15,11 @@ void Card::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(sprite, states);
 }
 
+sf::FloatRect Card::getRectangle()
+{
+	return sprite.getGlobalBounds();
+}
+
 
 Card::~Card()
 {
