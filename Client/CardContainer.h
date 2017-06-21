@@ -12,8 +12,8 @@ private:
 	virtual void onClicked(Card &card) = 0;
 	virtual void onGetFocus() = 0;
 	virtual void onLostFocus() = 0;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 protected:
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	std::vector<Card> cards;
 public:
 	CardContainer();
@@ -22,6 +22,7 @@ public:
 	sf::FloatRect getRectangle();
 	void setPosition(float x, float y);
 	const sf::Vector2f& getPosition();
+	void setCenterPositionToX(sf::FloatRect rect);
 	~CardContainer();
 };
 

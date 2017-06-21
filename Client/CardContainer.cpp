@@ -79,6 +79,16 @@ const sf::Vector2f & CardContainer::getPosition()
 	return position;
 }
 
+void CardContainer::setCenterPositionToX(sf::FloatRect rect)
+{
+	sf::FloatRect thisRect = this->getRectangle();
+
+	//float startX = thisRect.left;
+	//float endX = thisRect.left + thisRect.width;
+
+	this->setPosition(rect.left + rect.width / 2 - thisRect.width / 2, thisRect.top);
+}
+
 void CardContainer::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for (auto& card : cards)

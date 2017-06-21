@@ -4,8 +4,6 @@
 class AssetsManager
 {
 private:
-	static constexpr int X_CARD_SIZE = 112;
-	static constexpr int Y_CARD_SIZE = 156;
 	sf::Texture cardsSheet;
 public:
 	AssetsManager();
