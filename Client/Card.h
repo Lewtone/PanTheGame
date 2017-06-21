@@ -22,12 +22,15 @@ enum Rank
 class Card : public sf::Drawable
 {
 private:
-	constexpr static float SCALE = 1.0f;	//scaling is ugly
-	constexpr static float ACTIVE_CARD_JUMP = 20.0f;
 	sf::Sprite sprite;
 	bool active = false;
 	bool hovered = false;
 public:
+	constexpr static float SCALE = 1.0f;	//scaling is ugly
+	constexpr static float ACTIVE_CARD_JUMP = 20.0f;
+	static constexpr int X_CARD_SIZE = 112;
+	static constexpr int Y_CARD_SIZE = 156;
+
 	Card(sf::Texture &texture, sf::IntRect rect);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::FloatRect getRectangle();
