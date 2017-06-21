@@ -70,6 +70,8 @@ void CardContainer::setPosition(float x, float y)
 {
 	position.x = x;
 	position.y = y;
+	for (int i = 0; i != cards.size(); ++i)
+		cards[i].setPosition(position.x + SPACE * i, position.y);
 }
 
 const sf::Vector2f & CardContainer::getPosition()
