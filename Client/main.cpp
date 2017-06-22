@@ -9,6 +9,17 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Pan The Game");
 	window.setFramerateLimit(60);
 	AssetsManager assetsManager;
+	const int bx = window.getSize().x / 2 - PlayerSit::WIDTH_SIT / 2;
+	const int by = window.getSize().y - PlayerSit::HEIGHT_SIT - 20;
+
+	const int tx = window.getSize().x / 2 - PlayerSit::WIDTH_SIT /2;
+	const int ty = Card::Y_CARD_SIZE + Card::ACTIVE_CARD_JUMP + 20;
+
+	const int lx = 240;
+	const int ly = window.getSize().y / 2 + Card::Y_CARD_SIZE / 2 - Card::ACTIVE_CARD_JUMP;
+
+	const int rx = window.getSize().x - 240 - PlayerSit::WIDTH_SIT;
+	const int ry = window.getSize().y / 2 + Card::Y_CARD_SIZE / 2 - Card::ACTIVE_CARD_JUMP;
 
 	
 	std::vector<PlayerSit> sits;
@@ -16,31 +27,31 @@ int main()
 		sits.push_back(PlayerSit());
 
 	//bottom
-	sits.at(0).setPosition(window.getSize().x / 2 - sits.at(0).getShapeRectangle().width / 2, window.getSize().y - sits.at(0).getShapeRectangle().height - 20);
+	sits.at(0).setPosition(bx, by);
 	//top
-	sits.at(1).setPosition(window.getSize().x / 2 - sits.at(1).getShapeRectangle().width / 2, Card::Y_CARD_SIZE + Card::ACTIVE_CARD_JUMP + 20);
+	sits.at(1).setPosition(tx, ty);
 	//left	
-	sits.at(2).setPosition(sits.at(2).getShapeRectangle().width + 30, window.getSize().y / 2 - sits.at(2).getShapeRectangle().height / 2 + Card::Y_CARD_SIZE / 2);
+	sits.at(2).setPosition(lx, ly);
 	//right
-	sits.at(3).setPosition(window.getSize().x - sits.at(3).getShapeRectangle().width * 2 - 30, window.getSize().y / 2 - sits.at(3).getShapeRectangle().height / 2 + Card::Y_CARD_SIZE / 2);
+	sits.at(3).setPosition(rx, ry);
 
 	for (PlayerSit &sit : sits)
 	{
 		sit.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
-		sit.addCard(assetsManager.createCard(Rank::QUEEN, Suit::HEARTS));
-		sit.addCard(assetsManager.createCard(Rank::TEN, Suit::CLUBS));
-		sit.addCard(assetsManager.createCard(Rank::NINE, Suit::DIAMONDS));
+		sit.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
+		sit.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
+		sit.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
+		sit.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
 		sit.setCenterPositionToX(sit.getShapeRectangle());
 	}
 	
 	//stack
 	CardStack cards;
-	cards.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
-	cards.addCard(assetsManager.createCard(Rank::QUEEN, Suit::HEARTS));
-	cards.addCard(assetsManager.createCard(Rank::TEN, Suit::CLUBS));
-	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::DIAMONDS));
+	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::HEARTS));
 	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::SPADES));
-	cards.setPosition(window.getSize().x / 2 - cards.getRectangle().width / 2, window.getSize().y / 2 - cards.getRectangle().height / 2);
+	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::DIAMONDS));
+	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::CLUBS));
+	cards.setPosition(window.getSize().x / 2 - Card::X_CARD_SIZE / 2, window.getSize().y / 2 - cards.getRectangle().height / 2);
 
 
 	while (window.isOpen())
