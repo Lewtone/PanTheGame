@@ -17,7 +17,7 @@ void PlayerSit::onLostFocus()
 
 PlayerSit::PlayerSit()
 {
-	shape.setSize(sf::Vector2f(100, 50));
+	shape.setSize(sf::Vector2f(WIDTH_SIT, HEIGHT_SIT));
 	shape.setFillColor(sf::Color::Blue);
 }
 

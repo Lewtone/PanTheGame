@@ -10,6 +10,8 @@ private:
 	virtual void onClicked(Card &card);
 	virtual void onGetFocus();
 	virtual void onLostFocus();
+	static constexpr int WIDTH_SIT = 100;
+	static constexpr int HEIGHT_SIT = 50;
 public:
 	PlayerSit();
 	void setPosition(float x, float y);

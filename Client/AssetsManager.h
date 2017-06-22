@@ -9,5 +9,6 @@ public:
 	AssetsManager();
 	Card createCard(int x, int y);
 	~AssetsManager();
+
 };
 
