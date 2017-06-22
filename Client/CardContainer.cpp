@@ -18,7 +18,7 @@ void CardContainer::handleEvent(sf::Event & event)
 	{
 		case sf::Event::MouseButtonReleased:
 		{
-			sf::Vector2f mouseVector(event.mouseButton.x, event.mouseButton.y);
+			sf::Vector2f mouseVector(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y));
 
 			for (int i = cards.size(); i != 0; --i)
 			{
@@ -33,7 +33,7 @@ void CardContainer::handleEvent(sf::Event & event)
 
 		case sf::Event::MouseMoved:
 		{
-			sf::Vector2f mouseVector(event.mouseMove.x, event.mouseMove.y);
+			sf::Vector2f mouseVector(static_cast<float>(event.mouseMove.x), static_cast<float>(event.mouseMove.y));
 			if (!isFocused && this->getRectangle().contains(mouseVector))
 			{
 				isFocused = true;

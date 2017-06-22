@@ -9,21 +9,21 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1280, 720), "Pan The Game");
 	window.setFramerateLimit(60);
 	AssetsManager assetsManager;
-	const int bx = window.getSize().x / 2 - PlayerSit::WIDTH_SIT / 2;
-	const int by = window.getSize().y - PlayerSit::HEIGHT_SIT - 20;
+	const float bx = window.getSize().x / 2.0f - PlayerSit::WIDTH_SIT / 2.0f;
+	const float by = window.getSize().y - PlayerSit::HEIGHT_SIT - 20.0f;
 
-	const int tx = window.getSize().x / 2 - PlayerSit::WIDTH_SIT /2;
-	const int ty = Card::Y_CARD_SIZE + Card::ACTIVE_CARD_JUMP + 20;
+	const float tx = window.getSize().x / 2.0f - PlayerSit::WIDTH_SIT / 2.0f;
+	const float ty = Card::Y_CARD_SIZE + Card::ACTIVE_CARD_JUMP + 20.0f;
 
-	const int lx = 240;
-	const int ly = window.getSize().y / 2 + Card::Y_CARD_SIZE / 2 - Card::ACTIVE_CARD_JUMP;
+	const float lx = 240.0f;
+	const float ly = window.getSize().y / 2.0f + Card::Y_CARD_SIZE / 2.0f - Card::ACTIVE_CARD_JUMP;
 
-	const int rx = window.getSize().x - 240 - PlayerSit::WIDTH_SIT;
-	const int ry = window.getSize().y / 2 + Card::Y_CARD_SIZE / 2 - Card::ACTIVE_CARD_JUMP;
+	const float rx = window.getSize().x - 240.0f - PlayerSit::WIDTH_SIT;
+	const float ry = window.getSize().y / 2.0f + Card::Y_CARD_SIZE / 2.0f - Card::ACTIVE_CARD_JUMP;
 
 	
 	std::vector<PlayerSit> sits;
-	for (uint16_t i = 0; i < 4; ++i)
+	for (size_t i = 0; i < 4; ++i)
 		sits.push_back(PlayerSit());
 
 	//bottom
@@ -51,7 +51,7 @@ int main()
 	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::SPADES));
 	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::DIAMONDS));
 	cards.addCard(assetsManager.createCard(Rank::NINE, Suit::CLUBS));
-	cards.setPosition(window.getSize().x / 2 - Card::X_CARD_SIZE / 2, window.getSize().y / 2 - cards.getRectangle().height / 2);
+	cards.setPosition(window.getSize().x / 2.0f - Card::X_CARD_SIZE / 2.0f, window.getSize().y / 2.0f - cards.getRectangle().height / 2.0f);
 
 
 	while (window.isOpen())

@@ -10,7 +10,7 @@ void CardStack::onClicked(Card & card)
 void CardStack::onGetFocus()
 {
 	std::cout << "Focus get\n";
-	int k = (cards.size() - 1 > 3) ? (cards.size() - 1 - 3) : 0;
+	size_t k = (cards.size() - 1 > 3) ? (cards.size() - 1 - 3) : 0;
 	for (size_t i = this->cards.size() - 1; i > k; --i)
 		this->cards.at(i).hover();
 }
