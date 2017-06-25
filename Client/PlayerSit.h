@@ -3,7 +3,7 @@
 #include <iostream>
 
 class PlayerSit :
-	public CardContainer, public sf::Drawable
+	public CardContainer
 {
 private:
 	sf::RectangleShape shape;
@@ -17,8 +17,8 @@ public:
 	sf::FloatRect getShapeRectangle();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	static constexpr int WIDTH_SIT = 100;
-	static constexpr int HEIGHT_SIT = 50;
+	static constexpr float WIDTH_SIT = 100.f;
+	static constexpr float HEIGHT_SIT = 50.f;
 	~PlayerSit();
 };
 
