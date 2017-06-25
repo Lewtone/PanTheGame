@@ -5,9 +5,11 @@ class AssetsManager
 {
 private:
 	sf::Texture cardsSheet;
+	sf::Texture arrowTexture;
 public:
 	AssetsManager();
 	Card createCard(int x, int y);
+	sf::Texture& getArrowTexture();
 	~AssetsManager();
 
 };

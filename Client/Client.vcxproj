@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrowWidget.cpp" />
     <ClCompile Include="AssetsManager.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardContainer.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="PlayerSit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrowWidget.h" />
     <ClInclude Include="AssetsManager.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardContainer.h" />

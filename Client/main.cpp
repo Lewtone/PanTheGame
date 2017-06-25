@@ -3,6 +3,7 @@
 #include "Card.h"
 #include "CardStack.h"
 #include "PlayerSit.h"
+#include "ArrowWidget.h"
 
 int main()
 {
@@ -54,6 +55,10 @@ int main()
 	cards.setPosition(window.getSize().x / 2.0f - Card::X_CARD_SIZE / 2.0f, window.getSize().y / 2.0f - cards.getRectangle().height / 2.0f);
 
 
+	//arrows
+	ArrowWidget arrowWidget(assetsManager.getArrowTexture());
+	arrowWidget.setOnSit(sits.at(1));
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -71,6 +76,7 @@ int main()
 		window.draw(cards);
 		for (PlayerSit &sit : sits)
 			window.draw(sit);
+		window.draw(arrowWidget);
 		window.display();
 	}
 
