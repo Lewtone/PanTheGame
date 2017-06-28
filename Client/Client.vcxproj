@@ -124,6 +124,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardContainer.cpp" />
     <ClCompile Include="CardStack.cpp" />
+    <ClCompile Include="INetworkStackController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerSit.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardContainer.h" />
     <ClInclude Include="CardStack.h" />
+    <ClInclude Include="INetworkStackController.h" />
     <ClInclude Include="PlayerSit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
