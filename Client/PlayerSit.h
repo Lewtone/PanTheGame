@@ -7,9 +7,9 @@ class PlayerSit :
 {
 private:
 	sf::RectangleShape shape;
-	virtual void onClicked(Card &card);
-	virtual void onGetFocus();
-	virtual void onLostFocus();
+	virtual void onClicked(Card &card) override;
+	virtual void onGetFocus() override;
+	virtual void onLostFocus() override;
 public:
 	PlayerSit();
 	void setPosition(float x, float y);
