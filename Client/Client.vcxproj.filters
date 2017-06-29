@@ -39,6 +39,9 @@
     <ClCompile Include="INetworkStackController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="INetworkSitController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="INetworkStackController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INetworkSitController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
