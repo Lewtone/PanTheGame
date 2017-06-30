@@ -124,6 +124,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardContainer.cpp" />
     <ClCompile Include="CardStack.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="INetworkSitController.cpp" />
     <ClCompile Include="INetworkStackController.cpp" />
     <ClCompile Include="main.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardContainer.h" />
     <ClInclude Include="CardStack.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="INetworkSitController.h" />
     <ClInclude Include="INetworkStackController.h" />
     <ClInclude Include="PlayerSit.h" />
