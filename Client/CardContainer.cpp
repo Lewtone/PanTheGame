@@ -12,7 +12,7 @@ void CardContainer::addCard(Card card)
 	cards.push_back(card);
 }
 
-void CardContainer::handleEvent(sf::Event & event)
+void CardContainer::handleEvent(const sf::Event & event)
 {
 	switch (event.type)
 	{

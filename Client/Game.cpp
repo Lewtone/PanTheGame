@@ -3,8 +3,11 @@
 
 
 
-Game::Game()
+Game::Game() :
+	assetsManager(),
+	arrow(assetsManager.getArrowTexture())
 {
+
 }
 
 void Game::setupSits(sf::RenderWindow& window)
@@ -29,17 +32,50 @@ void Game::setupSits(sf::RenderWindow& window)
 	sits.at(2).setPosition(lx, ly);
 	//right
 	sits.at(3).setPosition(rx, ry);
+
+	arrow.setOnSit(sits.at(1));
+	sits.at(1).addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
+}
+
+void Game::setupStack(sf::RenderWindow & window)
+{
+	stack.setPosition(window.getSize().x / 2.0f - Card::X_CARD_SIZE / 2.0f, window.getSize().y / 2.0f - stack.getRectangle().height / 2.0f);
+	stack.addCard(assetsManager.createCard(Rank::ACE, Suit::SPADES));
+}
+
+void Game::onStackCardGet()
+{
+}
+
+void Game::onCardsPut()
+{
+}
+
+void Game::onSitTake()
+{
 }
 
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for (auto& sit : sits)
 		target.draw(sit);
+
+	target.draw(stack);
+	target.draw(arrow);
 }
 
 void Game::setup(sf::RenderWindow & window)
 {
 	setupSits(window);
+	setupStack(window);
+}
+
+void Game::handleEvent(const sf::Event & event)
+{
+	for (auto& sit : sits)
+		sit.handleEvent(event);
+
+	stack.handleEvent(event);
 }
 
 
