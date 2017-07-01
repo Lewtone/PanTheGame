@@ -8,9 +8,6 @@ int main()
 	Game game;
 	game.setup(window);
 
-
-	//arrows
-
 	while (window.isOpen())
 	{
 		sf::Event event;
