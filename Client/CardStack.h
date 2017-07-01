@@ -11,7 +11,7 @@ private:
 	virtual void onLostFocus() override;
 	INetworkStackController* controller;
 public:
-	CardStack();
+	CardStack(INetworkStackController* controller);
 	virtual ~CardStack();
 };
 

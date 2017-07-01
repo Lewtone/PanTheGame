@@ -5,9 +5,11 @@
 
 Game::Game() :
 	assetsManager(),
-	arrow(assetsManager.getArrowTexture())
+	arrow(assetsManager.getArrowTexture()),
+	stack(this)
 {
-
+	for (int i = 0; i != PLAYER_SITS_AMOUT; ++i)
+		sits.push_back(PlayerSit(this));
 }
 
 void Game::setupSits(sf::RenderWindow& window)

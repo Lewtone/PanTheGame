@@ -15,10 +15,11 @@ void PlayerSit::onLostFocus()
 {
 }
 
-PlayerSit::PlayerSit()
+PlayerSit::PlayerSit(INetworkSitController* controller)
 {
 	shape.setSize(sf::Vector2f(WIDTH_SIT, HEIGHT_SIT));
 	shape.setFillColor(sf::Color::Blue);
+	this->controller = controller;
 }
 
 void PlayerSit::setPosition(float x, float y)

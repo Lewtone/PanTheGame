@@ -22,8 +22,9 @@ void CardStack::onLostFocus()
 		this->cards.at(i).unhover();
 }
 
-CardStack::CardStack()
+CardStack::CardStack(INetworkStackController* controller)
 {
+	this->controller = controller;
 }
 
 

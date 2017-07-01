@@ -1,5 +1,5 @@
 #pragma once
-#include <array>
+#include <vector>
 #include "INetworkSitController.h"
 #include "INetworkStackController.h"
 #include <SFML\Graphics.hpp>
@@ -12,9 +12,10 @@
 class Game : public INetworkSitController, public INetworkStackController, public sf::Drawable
 {
 private:
+	static constexpr int PLAYER_SITS_AMOUT = 4;
 	sf::TcpSocket socket;
 	AssetsManager assetsManager;
-	std::array<PlayerSit, 4> sits;
+	std::vector<PlayerSit> sits;
 	CardStack stack;
 	ArrowWidget arrow;
 
