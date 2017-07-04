@@ -30,6 +30,8 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	void setup(sf::RenderWindow& window);
 	void handleEvent(const sf::Event& event);
+	void doNetworkStuff();
+	void connect();
 	~Game();
 };
 

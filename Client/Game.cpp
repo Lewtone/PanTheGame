@@ -80,6 +80,30 @@ void Game::handleEvent(const sf::Event & event)
 	stack.handleEvent(event);
 }
 
+void Game::doNetworkStuff()
+{
+	sf::Packet packet;
+	if (socket.receive(packet) == sf::Socket::Done)
+	{
+		std::string msg;
+		packet >> msg;
+		std::cout << msg << std::endl;
+	}
+}
+
+void Game::connect()
+{
+	sf::Socket::Status status = socket.connect(sf::IpAddress::LocalHost, 1337, sf::seconds(10.0f));
+	if (status != sf::Socket::Done)
+	{
+		std::cout << "Couldn't reach host\n";
+	}
+	else
+	{
+		socket.setBlocking(false);
+	}
+}
+
 
 Game::~Game()
 {

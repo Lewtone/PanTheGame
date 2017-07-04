@@ -7,6 +7,7 @@ int main()
 	window.setFramerateLimit(60);
 	Game game;
 	game.setup(window);
+	game.connect();
 
 	while (window.isOpen())
 	{
@@ -19,6 +20,7 @@ int main()
 			game.handleEvent(event);
 		}
 
+		game.doNetworkStuff();
 		window.clear(sf::Color(0, 0x90, 0x20, 255));
 		window.draw(game);
 		window.display();
