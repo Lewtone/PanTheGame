@@ -25,6 +25,10 @@ private:
 	virtual void onStackCardGet() override;
 	virtual void onCardsPut() override;
 	virtual void onSitTake() override;
+
+	void handlePacket(sf::Packet& packet);
+	void sendPacket(sf::Packet& packet);
+	void onPong(sf::Packet& packet);
 public:
 	Game();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -32,6 +36,16 @@ public:
 	void handleEvent(const sf::Event& event);
 	void doNetworkStuff();
 	void connect();
+
+	enum ServerPackets
+	{
+		PONG = 0
+	};
+
+	enum ClientPackets
+	{
+		PING = 0
+	};
 	~Game();
 };
 

@@ -16,5 +16,10 @@ public:
 	Server();
 	void run();
 	~Server();
+
+	enum Packets
+	{
+		PONG = 0
+	};
 };
 

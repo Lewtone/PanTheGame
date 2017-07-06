@@ -1,5 +1,5 @@
 #include "ServerGame.h"
-
+#include "Server.h"
 
 
 ServerGame::ServerGame()
@@ -9,10 +9,6 @@ ServerGame::ServerGame()
 void ServerGame::addPlayer(std::unique_ptr<Player> player)
 {
 	players.push_back(std::move(player));
-	sf::Packet packet;
-	std::string testString = "PING Hello World";
-	packet << testString;
-	players.back()->send(packet);
 }
 
 void ServerGame::deletePlayer(std::vector<std::unique_ptr<Player>>::iterator it)
@@ -27,6 +23,14 @@ std::vector<std::unique_ptr<Player>>& ServerGame::getPlayers()
 	return players;
 }
 
+
+void ServerGame::onPing(Player * player, sf::Packet & packet)
+{
+	std::cout << "got PING from client\n";
+	sf::Packet replyPacket;
+	replyPacket << static_cast<sf::Uint8>(Server::Packets::PONG);
+	player->send(replyPacket);
+}
 
 ServerGame::~ServerGame()
 {

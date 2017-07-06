@@ -57,6 +57,32 @@ void Game::onSitTake()
 {
 }
 
+void Game::handlePacket(sf::Packet & packet)
+{
+	sf::Uint8 header;
+	if (!(packet >> header))
+		return;
+
+	switch (header)
+	{
+	case ServerPackets::PONG:
+		onPong(packet);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::sendPacket(sf::Packet & packet)
+{
+	while (socket.send(packet) == sf::Socket::Partial);
+}
+
+void Game::onPong(sf::Packet & packet)
+{
+	std::cout << "Get PONG from server\n";
+}
+
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	for (auto& sit : sits)
@@ -84,16 +110,12 @@ void Game::doNetworkStuff()
 {
 	sf::Packet packet;
 	if (socket.receive(packet) == sf::Socket::Done)
-	{
-		std::string msg;
-		packet >> msg;
-		std::cout << msg << std::endl;
-	}
+		handlePacket(packet);
 }
 
 void Game::connect()
 {
-	sf::Socket::Status status = socket.connect(sf::IpAddress::LocalHost, 1337, sf::seconds(10.0f));
+	sf::Socket::Status status = socket.connect(sf::IpAddress::LocalHost, 1337, sf::seconds(3.0f));
 	if (status != sf::Socket::Done)
 	{
 		std::cout << "Couldn't reach host\n";
@@ -101,6 +123,9 @@ void Game::connect()
 	else
 	{
 		socket.setBlocking(false);
+		sf::Packet initialMessage;
+		initialMessage << static_cast<sf::Uint8>(ClientPackets::PING);
+		sendPacket(initialMessage);
 	}
 }
 

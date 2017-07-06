@@ -12,6 +12,8 @@ public:
 	void addPlayer(std::unique_ptr<Player> player);
 	void deletePlayer(std::vector<std::unique_ptr<Player>>::iterator it);
 	std::vector<std::unique_ptr<Player>>& getPlayers();
+
+	void onPing(Player * player, sf::Packet & packet);
 	~ServerGame();
 };
 

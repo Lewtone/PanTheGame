@@ -33,6 +33,7 @@ void Server::checkForListener()
 
 	std::unique_ptr<Player> player = std::make_unique<Player>();
 	listener.accept(*player);
+	selector.add(*player);
 	game.addPlayer(std::move(player));
 }
 
@@ -59,9 +60,18 @@ void Server::checkForSockets()
 
 void Server::handlePacket(Player * player, sf::Packet & packet)
 {
-	std::string message;
-	packet >> message;
-	std::cout << message << std::endl;
+	sf::Uint8 header;
+	if (!(packet >> header))
+		return;
+
+	switch (header)
+	{
+	case Player::Packets::PING:
+		game.onPing(player, packet);
+		break;
+	default:
+		break;
+	}
 }
 
 Server::~Server()
