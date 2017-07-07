@@ -68,6 +68,9 @@ void Game::handlePacket(sf::Packet & packet)
 	case ServerPackets::PONG:
 		onPong(packet);
 		break;
+	case ServerPackets::MSG:
+		onMsg(packet);
+		break;
 	default:
 		break;
 	}
@@ -81,6 +84,15 @@ void Game::sendPacket(sf::Packet & packet)
 void Game::onPong(sf::Packet & packet)
 {
 	std::cout << "Get PONG from server\n";
+}
+
+void Game::onMsg(sf::Packet & packet)
+{
+	std::string message;
+	if (!(packet >> message))
+		return;
+
+	std::cout << "[SERVER MESSAGE]: " << message << std::endl;
 }
 
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const

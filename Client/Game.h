@@ -29,6 +29,7 @@ private:
 	void handlePacket(sf::Packet& packet);
 	void sendPacket(sf::Packet& packet);
 	void onPong(sf::Packet& packet);
+	void onMsg(sf::Packet& packet);
 public:
 	Game();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -39,7 +40,8 @@ public:
 
 	enum ServerPackets
 	{
-		PONG = 0
+		PONG = 0,
+		MSG
 	};
 
 	enum ClientPackets
