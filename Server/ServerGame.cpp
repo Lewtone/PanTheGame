@@ -30,6 +30,7 @@ void ServerGame::onPing(Player * player, sf::Packet & packet)
 	sf::Packet replyPacket;
 	replyPacket << static_cast<sf::Uint8>(Server::Packets::PONG);
 	player->send(replyPacket);
+	player->sendMessage("Hello, everything is going well!");
 }
 
 ServerGame::~ServerGame()

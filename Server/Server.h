@@ -19,7 +19,8 @@ public:
 
 	enum Packets
 	{
-		PONG = 0
+		PONG = 0,
+		MSG
 	};
 };
 

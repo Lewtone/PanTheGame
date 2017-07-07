@@ -5,6 +5,7 @@ class Player : public sf::TcpSocket
 {
 public:
 	Player();
+	void sendMessage(std::string message);
 	~Player();
 
 	enum Packets
