@@ -4,19 +4,19 @@
 enum Suit
 {
 	CLUBS = 0,
-	DIAMONDS = 1,
-	HEARTS = 2,
-	SPADES = 3
+	DIAMONDS,
+	HEARTS,
+	SPADES
 };
 
 enum Rank
 {
-	NINE = 9,
-	TEN = 10,
-	JACK = 11,
-	QUEEN = 12,
-	KING = 13,
-	ACE = 14
+	NINE = 0,
+	TEN,
+	JACK,
+	QUEEN,
+	KING,
+	ACE
 };
 
 class Card : public sf::Drawable

@@ -10,7 +10,7 @@ AssetsManager::AssetsManager()
 
 Card AssetsManager::createCard(int rank, int suit)
 {
-	return Card(cardsSheet, sf::IntRect(Card::X_CARD_SIZE * (rank - 9), Card::Y_CARD_SIZE * suit, Card::X_CARD_SIZE, Card::Y_CARD_SIZE));
+	return Card(cardsSheet, sf::IntRect(Card::X_CARD_SIZE * rank, Card::Y_CARD_SIZE * suit, Card::X_CARD_SIZE, Card::Y_CARD_SIZE));
 }
 
 sf::Texture & AssetsManager::getArrowTexture()
