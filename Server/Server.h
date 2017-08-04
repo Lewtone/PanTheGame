@@ -20,7 +20,13 @@ public:
 	enum Packets
 	{
 		PONG = 0,
-		MSG
+		MSG,
+		PLAYER_AMOUNT,
+		MY_CARDS,
+		OTHER_CARDS,
+		STACK_CARDS,
+		CURRENT_TURE,
+		SIT_INFO
 	};
 };
 
