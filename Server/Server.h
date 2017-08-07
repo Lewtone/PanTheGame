@@ -5,13 +5,14 @@
 class Server
 {
 private:
+	int currentId = 0;
 	sf::TcpListener listener;
 	sf::SocketSelector selector;
 	ServerGame game;
 	void loop();
 	void checkForListener();
 	void checkForSockets();
-	void handlePacket(Player* player, sf::Packet& packet);
+	void handlePacket(const std::shared_ptr<Player>& player, sf::Packet& packet);
 public:
 	Server();
 	void run();

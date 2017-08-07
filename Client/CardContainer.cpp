@@ -12,6 +12,11 @@ void CardContainer::addCard(Card card)
 	cards.push_back(card);
 }
 
+void CardContainer::clearCards()
+{
+	cards.clear();
+}
+
 void CardContainer::handleEvent(const sf::Event & event)
 {
 	switch (event.type)

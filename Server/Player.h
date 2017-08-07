@@ -12,20 +12,22 @@ private:
 	std::string nickname;
 	std::vector<ServerCard> cards;
 public:
-	Player();
+	Player(int id);
 	int getId();
 	std::string getNickname();
 	void sendMessage(std::string message);
 	void sendCards();
-	void sendOtherCardsInfo(std::vector<std::unique_ptr<ServerSit>>& sits);
+	void sendOtherCardsInfo(std::vector<std::shared_ptr<ServerSit>>& sits);
 	void sendInfoAboutCurrentTure(int currentTure);
-	void sendSitInfo(std::vector<std::unique_ptr<ServerSit>> &sits);
+	void sendSitInfo(std::vector<std::shared_ptr<ServerSit>> &sits);
+	void sendPlayersAmount(int playersAmount);
 	const std::vector<ServerCard> &getCards();
 	~Player();
 
 	enum Packets
 	{
-		PING = 0
+		PING = 0,
+		TAKE_SIT
 	};
 };
 

@@ -31,10 +31,12 @@ void Server::checkForListener()
 	if (!selector.isReady(listener))
 		return;
 
-	std::unique_ptr<Player> player = std::make_unique<Player>();
+	std::shared_ptr<Player> player = std::make_shared<Player>(currentId);
 	listener.accept(*player);
 	selector.add(*player);
 	game.addPlayer(std::move(player));
+
+	currentId++;
 }
 
 void Server::checkForSockets()
@@ -42,7 +44,7 @@ void Server::checkForSockets()
 	auto& players = game.getPlayers();
 	for (auto it = players.begin(); it != players.end(); ++it)
 	{
-		Player* player = it->get();
+		std::shared_ptr<Player> player = *it;
 		if (selector.isReady(*player))
 		{
 			std::cout << "Selector signals ready\n";
@@ -58,7 +60,7 @@ void Server::checkForSockets()
 	}
 }
 
-void Server::handlePacket(Player * player, sf::Packet & packet)
+void Server::handlePacket(const std::shared_ptr<Player>& player, sf::Packet & packet)
 {
 	sf::Uint8 header;
 	if (!(packet >> header))
@@ -68,6 +70,9 @@ void Server::handlePacket(Player * player, sf::Packet & packet)
 	{
 	case Player::Packets::PING:
 		game.onPing(player, packet);
+		break;
+	case Player::Packets::TAKE_SIT:
+		game.onTakeSit(player, packet);
 		break;
 	default:
 		break;

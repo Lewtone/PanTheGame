@@ -14,6 +14,8 @@ public:
 	std::vector<ServerCard> getCards();
 	int getPlayerId();
 	std::string getPlayerNickname();
+	void setPlayer(const std::shared_ptr<Player> &player);
+	void free();
 	~ServerSit();
 };
 

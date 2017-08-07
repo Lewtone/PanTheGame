@@ -18,6 +18,7 @@ protected:
 public:
 	CardContainer();
 	void addCard(Card card);
+	void clearCards();
 	void handleEvent(const sf::Event& event);
 	sf::FloatRect getRectangle();
 	void setPosition(float x, float y);

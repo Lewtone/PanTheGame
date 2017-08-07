@@ -35,6 +35,16 @@ std::string ServerSit::getPlayerNickname()
 	return "";
 }
 
+void ServerSit::setPlayer(const std::shared_ptr<Player>& player)
+{
+	this->currentPlayer = player;
+}
+
+void ServerSit::free()
+{
+	this->currentPlayer.reset();
+}
+
 
 ServerSit::~ServerSit()
 {

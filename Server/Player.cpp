@@ -2,8 +2,9 @@
 #include "Server.h"
 
 
-Player::Player()
+Player::Player(int id)
 {
+	this->id = id;
 }
 
 int Player::getId()
@@ -34,7 +35,7 @@ void Player::sendCards()
 	this->send(packet);
 }
 
-void Player::sendOtherCardsInfo(std::vector<std::unique_ptr<ServerSit>>& sits)
+void Player::sendOtherCardsInfo(std::vector<std::shared_ptr<ServerSit>>& sits)
 {
 	sf::Packet packet;
 	packet << static_cast<sf::Uint8>(Server::OTHER_CARDS) << sits.size();
@@ -42,7 +43,7 @@ void Player::sendOtherCardsInfo(std::vector<std::unique_ptr<ServerSit>>& sits)
 	for (int i = 0; i != sits.size(); ++i)
 	{
 		std::vector<ServerCard> currentSitCards = sits[i]->getCards();
-		packet << i << currentSitCards.size();
+		packet << currentSitCards.size();
 	}
 
 	this->send(packet);
@@ -56,7 +57,7 @@ void Player::sendInfoAboutCurrentTure(int currentTure)
 	this->send(packet);
 }
 
-void Player::sendSitInfo(std::vector<std::unique_ptr<ServerSit>>& sits)
+void Player::sendSitInfo(std::vector<std::shared_ptr<ServerSit>>& sits)
 {
 	sf::Packet packet;
 	packet << static_cast<sf::Uint8>(Server::SIT_INFO) << sits.size();
@@ -65,8 +66,18 @@ void Player::sendSitInfo(std::vector<std::unique_ptr<ServerSit>>& sits)
 	{
 		auto& sit = sits[i];
 		if (sit->isTaken())
-			packet << i << sit->getPlayerNickname();
+			packet << true << sit->getPlayerNickname();
+		else
+			packet << false;
 	}
+
+	this->send(packet);
+}
+
+void Player::sendPlayersAmount(int playersAmount)
+{
+	sf::Packet packet;
+	packet << static_cast<sf::Uint8>(Server::PLAYER_AMOUNT) << playersAmount;
 
 	this->send(packet);
 }

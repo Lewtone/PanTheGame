@@ -9,7 +9,7 @@ Game::Game() :
 	stack(this)
 {
 	for (int i = 0; i != PLAYER_SITS_AMOUT; ++i)
-		sits.push_back(PlayerSit(this));
+		sits.push_back(PlayerSit(i, this));
 }
 
 void Game::setupSits(sf::RenderWindow& window)
@@ -53,8 +53,12 @@ void Game::onCardsPut()
 {
 }
 
-void Game::onSitTake()
+void Game::onSitTake(int id)
 {
+	sf::Packet packet;
+	packet << static_cast<sf::Uint8>(ClientPackets::TAKE_SIT) << id;
+
+	sendPacket(packet);
 }
 
 void Game::handlePacket(sf::Packet & packet)
@@ -71,6 +75,25 @@ void Game::handlePacket(sf::Packet & packet)
 	case ServerPackets::MSG:
 		onMsg(packet);
 		break;
+	case ServerPackets::PLAYER_AMOUNT:
+		onPlayerAmount(packet);
+		break;
+	case ServerPackets::MY_CARDS:
+		onMyCards(packet);
+		break;
+	case ServerPackets::OTHER_CARDS:
+		onOtherCards(packet);
+		break;
+	case ServerPackets::STACK_CARDS:
+		onStackCards(packet);
+		break;
+	case ServerPackets::CURRENT_TURE:
+		onCurrentTure(packet);
+		break;
+	case ServerPackets::SIT_INFO:
+		onSitInfo(packet);
+		break;
+
 	default:
 		break;
 	}
@@ -93,6 +116,145 @@ void Game::onMsg(sf::Packet & packet)
 		return;
 
 	std::cout << "[SERVER MESSAGE]: " << message << std::endl;
+}
+
+void Game::onPlayerAmount(sf::Packet & packet)
+{
+	int playersAmount;
+
+	if (!(packet >> playersAmount))
+		return;
+
+	std::cout << "[PLAYERS AMOUNT]: " << playersAmount << std::endl;
+}
+
+void Game::onMyCards(sf::Packet & packet)
+{
+	if (mySitId == -1)
+	{
+		std::cout << "[CLIENT ERROR]: SERVER SENT ME A SET OF CARDS, BUT IM NOT SITTING ATM" << std::endl;
+		return;
+	}
+
+	int sizeOfCards = 0;
+
+	if (!(packet >> sizeOfCards))
+		return;
+
+	PlayerSit& mySit = sits.at(mySitId);
+	mySit.clearCards();
+
+	for (int i = 0; i != sizeOfCards; ++i)
+	{
+		sf::Uint8 rank;
+		sf::Uint8 suit;
+
+		if (!(packet >> rank >> suit))
+			return;
+
+		mySit.addCard(assetsManager.createCard(rank, suit));
+	}
+
+	std::cout << "[CLIENT MESSAGE]: Added " << sizeOfCards << " to your hand." << std::endl;
+}
+
+void Game::onOtherCards(sf::Packet & packet)
+{
+	int sizeOfSits = 0;
+
+	if (!(packet >> sizeOfSits))
+		return;
+
+	if (sizeOfSits < 0 || sizeOfSits > sits.size())
+		return;
+
+	for (int i = 0; i != sits.size(); ++i)
+	{
+		if (i == mySitId)
+			continue;
+
+		PlayerSit& sit = sits.at(i);
+		
+		int dummyCardsSize = 0;
+		sit.clearCards();
+
+		if (!(packet >> dummyCardsSize))
+			return;
+
+		for (int j = 0; j != dummyCardsSize; ++j)
+			sit.addCard(assetsManager.createCard(0, 0)); //dummy card later
+	}
+}
+
+void Game::onStackCards(sf::Packet & packet)
+{
+	int sizeOfStackCards = 0;
+
+	if (!(packet >> sizeOfStackCards))
+		return;
+
+	stack.clearCards();
+
+	for (int i = 0; i != sizeOfStackCards; ++i)
+	{
+		sf::Uint8 rank;
+		sf::Uint8 suit;
+
+		if (!(packet >> rank >> suit))
+			return;
+
+		stack.addCard(assetsManager.createCard(rank, suit));
+	}
+
+	std::cout << "[CLIENT MESSAGE]: Added " << sizeOfStackCards << " to your stack." << std::endl;
+}
+
+void Game::onSitInfo(sf::Packet & packet)
+{
+	int sizeOfSits = 0;
+
+	if (!(packet >> sizeOfSits))
+		return;
+
+	if (sizeOfSits < 0 || sizeOfSits > sits.size())
+		return;
+
+	for (int i = 0; i != sizeOfSits; ++i)
+	{
+		PlayerSit& sit = sits[i];
+		
+		bool state = false;
+
+		if (!(packet >> state))
+			return;
+
+		if (state)
+		{
+			std::string nickname;
+			if (!(packet >> nickname))
+				return;
+		}
+
+		sit.setSitting(state);
+	}
+}
+
+void Game::onCurrentTure(sf::Packet & packet)
+{
+	int packetTureSitId;
+
+	if (!(packet >> packetTureSitId))
+		return;
+
+	this->currentTureSitId = packetTureSitId;
+
+	if (currentTureSitId < 0 || packetTureSitId >= sits.size())
+	{
+		std::cout << "[CLIENT ERROR]: Couldn't set arrow because it's now ture of player with sit id equal to " << packetTureSitId << std::endl;
+		return;
+	}
+
+	arrow.setOnSit(sits[packetTureSitId]);
 }
 
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
