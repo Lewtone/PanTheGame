@@ -2,10 +2,60 @@
 #include "Server.h"
 
 
+
 ServerGame::ServerGame()
 {
 	for (int i = 0; i != SITS_SIZE; ++i)
 		sits.push_back(std::make_shared<ServerSit>());
+}
+
+void ServerGame::startGame()
+{
+	started = true;
+	playingSitsId.clear();
+
+	for (int i = 0; i != sits.size(); ++i)
+	{
+		std::shared_ptr<ServerSit>& sit = sits[i];
+
+		if (sit->isTaken())
+			playingSitsId.push_back(i);
+	}
+
+	std::vector<ServerCard> allPossibleCards = getAllPossibleCards();
+
+	shuffleVector(allPossibleCards);
+
+	giveFirstCards(allPossibleCards);
+}
+
+std::vector<ServerCard> ServerGame::getAllPossibleCards()
+{
+	std::vector<ServerCard> results;
+
+	for (int i = 0; i != 6; ++i)
+		for (int j = 0; j != 4; ++j)
+			results.push_back(ServerCard(static_cast<Suit>(j), static_cast<Rank>(i)));
+
+	return results;
+}
+
+void ServerGame::shuffleVector(std::vector<ServerCard>& cards)
+{
+	std::random_device rd;
+	std::mt19937 g(rd());
+
+	std::shuffle(cards.begin(), cards.end(), g);
+}
+
+void ServerGame::giveFirstCards(std::vector<ServerCard>& cards)
+{
+	for (int i = 0; i != cards.size(); ++i)
+	{
+		int currentSitId = playingSitsId[i % playingSitsId.size()];
+		std::shared_ptr<ServerSit>& sit = sits[currentSitId];
+		sit->addCard(cards[i]);
+	}
 }
 
 void ServerGame::addPlayer(std::shared_ptr<Player> player)

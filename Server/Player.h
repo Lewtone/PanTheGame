@@ -8,6 +8,7 @@ class ServerSit;
 class Player : public sf::TcpSocket
 {
 private:
+	bool ready;
 	int id;
 	std::string nickname;
 	std::vector<ServerCard> cards;
@@ -21,6 +22,8 @@ public:
 	void sendInfoAboutCurrentTure(int currentTure);
 	void sendSitInfo(std::vector<std::shared_ptr<ServerSit>> &sits);
 	void sendPlayersAmount(int playersAmount);
+	void setReady(bool state);
+	bool isReady();
 	const std::vector<ServerCard> &getCards();
 	~Player();
 

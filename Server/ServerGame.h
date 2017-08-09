@@ -4,6 +4,9 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <random>
+
 class ServerGame
 {
 private:
@@ -12,9 +15,11 @@ private:
 	std::vector<std::shared_ptr<ServerSit>> sits;
 	std::vector<int> playingSitsId;
 	int currentSitTure = 0;
-	bool isStarted = false;
+	bool started = false;
 
 	void startGame();
+	std::vector<ServerCard> getAllPossibleCards();
+	void shuffleVector(std::vector<ServerCard>& cards);
 public:
 	ServerGame();
 	void addPlayer(std::shared_ptr<Player> player);
