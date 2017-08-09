@@ -22,6 +22,15 @@ void ServerGame::deletePlayer(std::vector<std::shared_ptr<Player>>::iterator it)
 	std::cout << "Size of players: " << players.size() << std::endl;
 }
 
+bool ServerGame::canStartGame()
+{
+	for (auto& sit : sits)
+		if (sit->isTaken() && !sit->isReady())
+			return false;
+
+	return true;
+}
+
 std::vector<std::shared_ptr<Player>>& ServerGame::getPlayers()
 {
 	return players;
@@ -61,6 +70,7 @@ void ServerGame::onTakeSit(const std::shared_ptr<Player> & player, sf::Packet & 
 			sit->free();
 
 	sit->setPlayer(player);
+	player->setReady(true);
 
 	for (auto& player : players)
 		player->sendSitInfo(sits);

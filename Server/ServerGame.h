@@ -10,11 +10,16 @@ private:
 	static const int SITS_SIZE = 4;
 	std::vector<std::shared_ptr<Player>> players;
 	std::vector<std::shared_ptr<ServerSit>> sits;
+	std::vector<int> playingSitsId;
 	int currentSitTure = 0;
+	bool isStarted = false;
+
+	void startGame();
 public:
 	ServerGame();
 	void addPlayer(std::shared_ptr<Player> player);
 	void deletePlayer(std::vector<std::shared_ptr<Player>>::iterator it);
+	bool canStartGame();
 	std::vector<std::shared_ptr<Player>>& getPlayers();
 
 	void onPing(const std::shared_ptr<Player> & player, sf::Packet & packet);

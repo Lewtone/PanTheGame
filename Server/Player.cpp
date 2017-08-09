@@ -82,6 +82,16 @@ void Player::sendPlayersAmount(int playersAmount)
 	this->send(packet);
 }
 
+void Player::setReady(bool state)
+{
+	this->ready = state;
+}
+
+bool Player::isReady()
+{
+	return ready;
+}
+
 const std::vector<ServerCard>& Player::getCards()
 {
 	return cards;

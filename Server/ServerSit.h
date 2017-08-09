@@ -16,6 +16,7 @@ public:
 	std::string getPlayerNickname();
 	void setPlayer(const std::shared_ptr<Player> &player);
 	void free();
+	bool isReady();
 	~ServerSit();
 };
 

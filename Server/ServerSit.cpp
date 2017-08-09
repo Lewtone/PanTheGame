@@ -45,6 +45,14 @@ void ServerSit::free()
 	this->currentPlayer.reset();
 }
 
+bool ServerSit::isReady()
+{
+	if (std::shared_ptr<Player> player = currentPlayer.lock())
+		return player->isReady();
+
+	return false;
+}
+
 
 ServerSit::~ServerSit()
 {
