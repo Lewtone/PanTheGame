@@ -20,6 +20,7 @@ private:
 	void startGame();
 	std::vector<ServerCard> getAllPossibleCards();
 	void shuffleVector(std::vector<ServerCard>& cards);
+	void giveFirstCards(std::vector<ServerCard>& cards);
 public:
 	ServerGame();
 	void addPlayer(std::shared_ptr<Player> player);

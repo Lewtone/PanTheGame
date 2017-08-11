@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "ServerCard.h"
 #include <memory>
 
 class Player;
@@ -17,6 +18,7 @@ public:
 	void setPlayer(const std::shared_ptr<Player> &player);
 	void free();
 	bool isReady();
+	void addCard(ServerCard card);
 	~ServerSit();
 };
 

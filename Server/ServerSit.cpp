@@ -53,6 +53,12 @@ bool ServerSit::isReady()
 	return false;
 }
 
+void ServerSit::addCard(ServerCard card)
+{
+	if (std::shared_ptr<Player> player = currentPlayer.lock())
+		player->addCard(card);
+}
+
 
 ServerSit::~ServerSit()
 {

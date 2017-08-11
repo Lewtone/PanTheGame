@@ -97,6 +97,11 @@ const std::vector<ServerCard>& Player::getCards()
 	return cards;
 }
 
+void Player::addCard(ServerCard card)
+{
+	cards.push_back(card);
+}
+
 
 Player::~Player()
 {

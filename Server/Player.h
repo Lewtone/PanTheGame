@@ -25,6 +25,7 @@ public:
 	void setReady(bool state);
 	bool isReady();
 	const std::vector<ServerCard> &getCards();
+	void addCard(ServerCard card);
 	~Player();
 
 	enum Packets
