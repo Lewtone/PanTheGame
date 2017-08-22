@@ -19,6 +19,7 @@ public:
 	void free();
 	bool isReady();
 	void addCard(ServerCard card);
+	const std::shared_ptr<Player> getPlayer();
 	~ServerSit();
 };
 

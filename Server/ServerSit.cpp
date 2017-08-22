@@ -59,6 +59,11 @@ void ServerSit::addCard(ServerCard card)
 		player->addCard(card);
 }
 
+const std::shared_ptr<Player> ServerSit::getPlayer()
+{
+	return currentPlayer.lock();
+}
+
 
 ServerSit::~ServerSit()
 {

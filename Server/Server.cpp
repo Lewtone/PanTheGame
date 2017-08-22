@@ -54,6 +54,7 @@ void Server::checkForSockets()
 			else if (player->receive(packet) == sf::Socket::Disconnected)
 			{
 				game.deletePlayer(it);
+				selector.remove(*player);
 				return;
 			}
 		}

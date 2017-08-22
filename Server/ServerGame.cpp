@@ -27,6 +27,8 @@ void ServerGame::startGame()
 	shuffleVector(allPossibleCards);
 
 	giveFirstCards(allPossibleCards);
+
+	notifyAboutCards();
 }
 
 std::vector<ServerCard> ServerGame::getAllPossibleCards()
@@ -58,11 +60,23 @@ void ServerGame::giveFirstCards(std::vector<ServerCard>& cards)
 	}
 }
 
+void ServerGame::notifyAboutCards()
+{
+	for (auto& sitId : playingSitsId)
+	{
+		if (const std::shared_ptr<Player> currentPlayer = sits[sitId]->getPlayer())
+		{
+			currentPlayer->sendCards();
+			currentPlayer->sendOtherCardsInfo(sits);
+		}
+	}
+}
+
 void ServerGame::addPlayer(std::shared_ptr<Player> player)
 {
 	players.push_back(std::move(player));
 
-	player->sendSitInfo(sits);
+	players.back()->sendSitInfo(sits);
 }
 
 void ServerGame::deletePlayer(std::vector<std::shared_ptr<Player>>::iterator it)
@@ -74,11 +88,26 @@ void ServerGame::deletePlayer(std::vector<std::shared_ptr<Player>>::iterator it)
 
 bool ServerGame::canStartGame()
 {
+	if (countReady() < 2)
+		return false;
+
 	for (auto& sit : sits)
 		if (sit->isTaken() && !sit->isReady())
 			return false;
 
 	return true;
+}
+
+int ServerGame::countReady()
+{
+	int count = 0;
+	for (auto& sit : sits)
+	{
+		if (auto& player = sit->getPlayer())
+			if (player->isReady()) count++;
+	}
+
+	return count;
 }
 
 std::vector<std::shared_ptr<Player>>& ServerGame::getPlayers()
@@ -125,6 +154,29 @@ void ServerGame::onTakeSit(const std::shared_ptr<Player> & player, sf::Packet & 
 	for (auto& player : players)
 		player->sendSitInfo(sits);
 
+	if (canStartGame())
+		startGame();
+
+}
+
+void ServerGame::onPutCards(const std::shared_ptr<Player>& player, sf::Packet & packet)
+{
+	int cardSize;
+	packet >> cardSize;
+
+	if (cardSize != 1 && cardSize != 4)
+	{
+		player->sendMessage("You can only put one or four cards at once");
+		return;
+	}
+
+	if (std::find(playingSitsId.begin(), playingSitsId.end(), player->getId()) == playingSitsId.end())
+	{
+		player->sendMessage("You must be sitting to put cards on the table");
+		return;
+	}
+
+	std::vector<ServerCard> wantedCards;
 }
 
 ServerGame::~ServerGame()

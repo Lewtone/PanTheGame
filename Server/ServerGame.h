@@ -21,15 +21,18 @@ private:
 	std::vector<ServerCard> getAllPossibleCards();
 	void shuffleVector(std::vector<ServerCard>& cards);
 	void giveFirstCards(std::vector<ServerCard>& cards);
+	void notifyAboutCards();
 public:
 	ServerGame();
 	void addPlayer(std::shared_ptr<Player> player);
 	void deletePlayer(std::vector<std::shared_ptr<Player>>::iterator it);
 	bool canStartGame();
+	int countReady();
 	std::vector<std::shared_ptr<Player>>& getPlayers();
 
 	void onPing(const std::shared_ptr<Player> & player, sf::Packet & packet);
 	void onTakeSit(const std::shared_ptr<Player> & player, sf::Packet & packet);
+	void onPutCards(const std::shared_ptr<Player> & player, sf::Packet & packet);
 	~ServerGame();
 };
 

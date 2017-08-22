@@ -31,7 +31,8 @@ public:
 	enum Packets
 	{
 		PING = 0,
-		TAKE_SIT
+		TAKE_SIT,
+		PUT_CARDS
 	};
 };
 
