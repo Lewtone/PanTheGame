@@ -2,6 +2,15 @@
 #include "Server.h"
 
 
+int Player::getPlayerSittingId(std::vector<std::shared_ptr<ServerSit>> &sits)
+{
+	for (auto& sit : sits)
+		if (sit->getPlayerId() == id)
+			return sit->getId();
+
+	return -1;
+}
+
 Player::Player(int id)
 {
 	this->id = id;
@@ -60,7 +69,7 @@ void Player::sendInfoAboutCurrentTure(int currentTure)
 void Player::sendSitInfo(std::vector<std::shared_ptr<ServerSit>>& sits)
 {
 	sf::Packet packet;
-	packet << static_cast<sf::Uint8>(Server::SIT_INFO) << sits.size();
+	packet << static_cast<sf::Uint8>(Server::SIT_INFO) << getPlayerSittingId(sits) << sits.size();
 
 	for (int i = 0; i != sits.size(); ++i)
 	{

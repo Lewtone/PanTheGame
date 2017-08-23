@@ -2,8 +2,9 @@
 
 
 
-ServerSit::ServerSit()
+ServerSit::ServerSit(int id)
 {
+	this->id = id;
 }
 
 bool ServerSit::isTaken()
@@ -62,6 +63,11 @@ void ServerSit::addCard(ServerCard card)
 const std::shared_ptr<Player> ServerSit::getPlayer()
 {
 	return currentPlayer.lock();
+}
+
+int ServerSit::getId()
+{
+	return id;
 }
 
 

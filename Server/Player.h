@@ -12,6 +12,8 @@ private:
 	int id;
 	std::string nickname;
 	std::vector<ServerCard> cards;
+
+	int getPlayerSittingId(std::vector<std::shared_ptr<ServerSit>> &sits);
 public:
 	Player(int id);
 	int getId();

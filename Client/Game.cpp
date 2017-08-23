@@ -170,16 +170,17 @@ void Game::onOtherCards(sf::Packet & packet)
 
 	for (int i = 0; i != sits.size(); ++i)
 	{
-		if (i == mySitId)
-			continue;
 
 		PlayerSit& sit = sits.at(i);
 		
 		int dummyCardsSize = 0;
-		sit.clearCards();
-
 		if (!(packet >> dummyCardsSize))
 			return;
+
+		if (i == mySitId)
+			continue;
+
+		sit.clearCards();
 
 		for (int j = 0; j != dummyCardsSize; ++j)
 			sit.addCard(assetsManager.createCard(0, 0)); //dummy card later
@@ -211,6 +212,12 @@ void Game::onStackCards(sf::Packet & packet)
 
 void Game::onSitInfo(sf::Packet & packet)
 {
+	int tempMySitId = -1;
+	if (!(packet >> tempMySitId))
+		return;
+
+	mySitId = tempMySitId;
+
 	int sizeOfSits = 0;
 
 	if (!(packet >> sizeOfSits))

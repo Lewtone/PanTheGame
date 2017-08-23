@@ -10,7 +10,7 @@ private:
 	std::weak_ptr<Player> currentPlayer;
 	int id;
 public:
-	ServerSit();
+	ServerSit(int id);
 	bool isTaken();
 	std::vector<ServerCard> getCards();
 	int getPlayerId();
@@ -20,6 +20,7 @@ public:
 	bool isReady();
 	void addCard(ServerCard card);
 	const std::shared_ptr<Player> getPlayer();
+	int getId();
 	~ServerSit();
 };
 

@@ -6,7 +6,7 @@
 ServerGame::ServerGame()
 {
 	for (int i = 0; i != SITS_SIZE; ++i)
-		sits.push_back(std::make_shared<ServerSit>());
+		sits.push_back(std::make_shared<ServerSit>(i));
 }
 
 void ServerGame::startGame()
@@ -77,6 +77,7 @@ void ServerGame::addPlayer(std::shared_ptr<Player> player)
 	players.push_back(std::move(player));
 
 	players.back()->sendSitInfo(sits);
+	players.back()->sendOtherCardsInfo(sits);
 }
 
 void ServerGame::deletePlayer(std::vector<std::shared_ptr<Player>>::iterator it)
@@ -127,6 +128,11 @@ void ServerGame::onPing(const std::shared_ptr<Player> & player, sf::Packet & pac
 
 void ServerGame::onTakeSit(const std::shared_ptr<Player> & player, sf::Packet & packet)
 {
+	if (started)
+	{
+		player->sendMessage("You can't sit while game is started.");
+		return;
+	}
 	int wantedSitId = -1;
 	packet >> wantedSitId;
 
