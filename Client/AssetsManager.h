@@ -6,6 +6,7 @@ class AssetsManager
 private:
 	sf::Texture cardsSheet;
 	sf::Texture arrowTexture;
+	sf::Texture backTexture;
 public:
 	AssetsManager();
 	Card createCard(int x, int y);

@@ -155,6 +155,7 @@ void Game::onMyCards(sf::Packet & packet)
 		mySit.addCard(assetsManager.createCard(rank, suit));
 	}
 
+
 	std::cout << "[CLIENT MESSAGE]: Added " << sizeOfCards << " to your hand." << std::endl;
 }
 
@@ -183,7 +184,7 @@ void Game::onOtherCards(sf::Packet & packet)
 		sit.clearCards();
 
 		for (int j = 0; j != dummyCardsSize; ++j)
-			sit.addCard(assetsManager.createCard(0, 0)); //dummy card later
+			sit.addCard(assetsManager.createCard(-1, -1));
 	}
 }
 
@@ -257,7 +258,7 @@ void Game::onCurrentTure(sf::Packet & packet)
 
 	if (currentTureSitId < 0 || packetTureSitId >= sits.size())
 	{
-		std::cout << "[CLIENT ERROR]: Couldn't set arrow because it's now ture of player with sit id equal to " << packetTureSitId << std::endl;
+		std::cout << "[CLIENT ERROR]: Couldn't set arrow because it's now turn of player with sit id equal to " << packetTureSitId << std::endl;
 		return;
 	}
 

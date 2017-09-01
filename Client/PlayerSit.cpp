@@ -67,6 +67,8 @@ void PlayerSit::handleEvent(const sf::Event & event)
 		}
 	}
 
+	CardContainer::handleEvent(event);
+
 }
 
 void PlayerSit::draw(sf::RenderTarget & target, sf::RenderStates states) const

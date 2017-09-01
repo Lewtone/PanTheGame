@@ -3,7 +3,8 @@
 
 enum Suit
 {
-	CLUBS = 0,
+	DEFAULT = -1,
+	CLUBS,
 	DIAMONDS,
 	HEARTS,
 	SPADES
@@ -11,7 +12,8 @@ enum Suit
 
 enum Rank
 {
-	NINE = 0,
+	NONE = -1,
+	NINE,
 	TEN,
 	JACK,
 	QUEEN,
