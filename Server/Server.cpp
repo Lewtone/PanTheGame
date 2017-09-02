@@ -75,6 +75,9 @@ void Server::handlePacket(const std::shared_ptr<Player>& player, sf::Packet & pa
 	case Player::Packets::TAKE_SIT:
 		game.onTakeSit(player, packet);
 		break;
+	case Player::Packets::PUT_CARDS:
+		game.onPutCards(player, packet);
+		break;
 	default:
 		break;
 	}

@@ -72,6 +72,17 @@ void ServerGame::notifyAboutCards()
 	}
 }
 
+void ServerGame::sendNextTurn()
+{
+	currentSitTure++;
+
+	if (currentSitTure >= playingSitsId.size())
+		currentSitTure = 0;
+
+	for (auto& player : players)
+		player->setTurn(sits[currentSitTure]->getId());
+}
+
 void ServerGame::addPlayer(std::shared_ptr<Player> player)
 {
 	players.push_back(std::move(player));

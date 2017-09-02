@@ -49,8 +49,12 @@ void Game::onStackCardGet()
 {
 }
 
-void Game::onCardsPut()
+void Game::onCardsPut(std::vector<Card> &cards)
 {
+	sf::Packet packet;
+	packet << static_cast<sf::Uint8>(ClientPackets::PUT_CARDS) << cards.size();
+
+
 }
 
 void Game::onSitTake(int id)

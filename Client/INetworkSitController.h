@@ -2,7 +2,7 @@
 class INetworkSitController
 {
 public:
-	virtual void onCardsPut() = 0;
+	virtual void onCardsPut(std::vector<Card> &cards) = 0;
 	virtual void onSitTake(int id) = 0;
 };
 

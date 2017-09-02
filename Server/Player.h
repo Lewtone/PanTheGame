@@ -25,6 +25,7 @@ public:
 	void sendSitInfo(std::vector<std::shared_ptr<ServerSit>> &sits);
 	void sendPlayersAmount(int playersAmount);
 	void setReady(bool state);
+	void setTurn(int sitId);
 	bool isReady();
 	const std::vector<ServerCard> &getCards();
 	void addCard(ServerCard card);

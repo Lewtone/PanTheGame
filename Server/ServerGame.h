@@ -22,6 +22,7 @@ private:
 	void shuffleVector(std::vector<ServerCard>& cards);
 	void giveFirstCards(std::vector<ServerCard>& cards);
 	void notifyAboutCards();
+	void sendNextTurn();
 public:
 	ServerGame();
 	void addPlayer(std::shared_ptr<Player> player);

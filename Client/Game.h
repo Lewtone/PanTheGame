@@ -25,7 +25,7 @@ private:
 	void setupStack(sf::RenderWindow& window);
 
 	virtual void onStackCardGet() override;
-	virtual void onCardsPut() override;
+	virtual void onCardsPut(std::vector<Card> &cards) override;
 	virtual void onSitTake(int id) override;
 
 	void handlePacket(sf::Packet& packet);
@@ -61,7 +61,8 @@ public:
 	enum ClientPackets
 	{
 		PING = 0,
-		TAKE_SIT
+		TAKE_SIT,
+		PUT_CARDS
 	};
 	~Game();
 };

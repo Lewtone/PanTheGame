@@ -96,6 +96,14 @@ void Player::setReady(bool state)
 	this->ready = state;
 }
 
+void Player::setTurn(int sitId)
+{
+	sf::Packet packet;
+	packet << static_cast<sf::Uint8>(Server::CURRENT_TURE) << sitId;
+
+	this->send(packet);
+}
+
 bool Player::isReady()
 {
 	return ready;
